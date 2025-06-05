@@ -15,21 +15,30 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Sidebar  from "./components/layout/sidebar";
-import Header from "./components/layout/header";
-import Content from './components/layout/content';
 
-function Dashboard(){
+export default function Header(){
   return(
-  <>
-    <Box sx={{ display: 'flex' }}>
-          <CssBaseline />
-      <Header/>
-      <Sidebar/>
-      <Content/>
-    </Box>
-  </>
+  <AppBar
+        position="fixed"
+        sx={{
+          width: { sm: `calc(100% - 240px)` },
+          ml: { sm: `240px` },
+        }}
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            //onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Learning Management System
+          </Typography>
+        </Toolbar>
+      </AppBar>
   )
 }
-
-export default Dashboard;
