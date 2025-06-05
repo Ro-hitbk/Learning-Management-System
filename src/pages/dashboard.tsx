@@ -15,9 +15,9 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Sidebar  from "./components/layout/sidebar";
-import Header from "./components/layout/header";
-import Content from './components/layout/content';
+import Sidebar  from "../components/layout/sidebar";
+import Header from "../components/layout/header";
+import Content from '../components/layout/content';
 
 function Dashboard(){
   return(
