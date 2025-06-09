@@ -1,8 +1,9 @@
-import {Box, Button, Card, CardMedia, TextField, Grid, Typography, InputAdornment, IconButton} from '@mui/material';
-import {useState, useEffect} from 'react';
+import {Box, Button, Card, TextField, Grid, Typography, InputAdornment, IconButton} from '@mui/material';
+import {useState} from 'react';
 import loginimage from '../../assets/login.avif';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
 import { useNavigate } from "react-router-dom";
+import { useAuth } from './authcontext';
 
 
 type Form = {
@@ -10,7 +11,10 @@ type Form = {
   password: string;
 };
 
+
 function Login(){
+
+  const {login} = useAuth();
 
   const navigate = useNavigate();
 
@@ -78,6 +82,8 @@ function Login(){
       .catch(error => console.error('Error', error));
 
       e.preventDefault();
+
+      login();
       navigate("/dashboard");
     }
   };

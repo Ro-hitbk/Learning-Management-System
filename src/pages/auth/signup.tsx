@@ -1,5 +1,5 @@
-import {Box, Button, Card, CardMedia, TextField, Grid, Typography, InputAdornment, IconButton} from '@mui/material';
-import {useState, useEffect} from 'react';
+import {Box, Button, Card, TextField, Grid, Typography, InputAdornment, IconButton} from '@mui/material';
+import {useState} from 'react';
 import signupimage from '../../assets/signup.avif';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
 
