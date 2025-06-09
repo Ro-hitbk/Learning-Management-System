@@ -20,14 +20,14 @@ function Content(){
                     <CardHeader title={'Profile'} />
                     <CardContent>
                       <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={3}>
-                        <Avatar sx={{height: 104, width: 104, fontSize: 50}}>H</Avatar>
+                        <Avatar sx={{height: 104, width: 104, fontSize: 50, margin: 7}}>H</Avatar>
                       </Box>
                       <Grid container sx={{width: '100%'}}>
                         {fields.map((item) => (
                           <Grid size={{xs:12, sm:12, md:6 }}>
                             <Box display='flex' flexDirection={'column'} gap={2} padding={2}>
                               <Typography>{item}:</Typography>
-                              <TextField label={`${item}`}></TextField>
+                              <TextField value={`${item}`}></TextField>
                             </Box>
                           </Grid>
                         ))}

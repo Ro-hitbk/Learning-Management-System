@@ -2,7 +2,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -10,6 +9,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 import Toolbar from '@mui/material/Toolbar';
+import { useNavigate } from 'react-router-dom';
+import PersonIcon from '@mui/icons-material/Person';
 
 const drawerWidth = 240;
 
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export default function Sidebar(props: Props) {
+  const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
@@ -41,25 +43,49 @@ export default function Sidebar(props: Props) {
     }
   };
 
+  const handleClick = (text: string) => {
+    console.log(text)
+    navigate("/dashboard/" + `${text}`)
+
+  }
+
   const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        {['Profile', 'Notifications'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+  <div>
+    <Toolbar />
+    <Divider />
+    <List sx={{ px: 1 }}>
+      {Object.entries({ Profile: 'profile', Notifications: 'notification' }).map(
+        ([text, routename]) => (
+          <ListItem key={text} disablePadding sx={{ mb: 1 }}>
+            <ListItemButton
+              onClick={() => handleClick(routename)}
+              sx={{
+                borderRadius: 2,
+                px: 2,
+                py: 1,
+                transition: 'background 0.3s, transform 0.2s',
+                '&:hover': {
+                  backgroundColor: '#e3f2fd',
+                  transform: 'translateX(4px)',
+                },
+              }}
+            >
+              <ListItemIcon sx={{ color: '#1976d2', minWidth: 40 }}>
+                {text === 'Profile' ? <PersonIcon /> : <MailIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText
+                primary={text}
+                primaryTypographyProps={{ fontWeight: 500 }}
+              />
             </ListItemButton>
           </ListItem>
-        ))}
-      </List>
-      <Divider/>
-    </div>
-  );
+        )
+      )}
+    </List>
+    <Divider />
+  </div>
+);
+
   // Remove this const when copying and pasting into your project.
   const container = window !== undefined ? () => window().document.body : undefined;
 
@@ -77,10 +103,19 @@ export default function Sidebar(props: Props) {
           open={mobileOpen}
           onTransitionEnd={handleDrawerTransitionEnd}
           onClose={handleDrawerClose}
+
+          // other props
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+              backgroundColor: '#f9fafc',
+              boxShadow: '2px 0 8px rgba(0, 0, 0, 0.05)',
+            },
           }}
+
+
           slotProps={{
             root: {
               keepMounted: true, // Better open performance on mobile.
@@ -93,7 +128,12 @@ export default function Sidebar(props: Props) {
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+              backgroundColor: '#f9fafc',
+              boxShadow: '2px 0 8px rgba(0, 0, 0, 0.05)',
+            },
           }}
           open
         >
