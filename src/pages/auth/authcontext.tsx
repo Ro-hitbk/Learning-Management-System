@@ -3,8 +3,8 @@ import type { ReactNode } from 'react';
 
 
 type AuthContextType = {
-  user: boolean | null;
-  login: () => void;
+  user: string | null;
+  login: (params: {user: string}) => void;
   logout: () => void;
 }
 
@@ -15,10 +15,18 @@ type AuthProvideProps = {
 }
 
 export const AuthProvider = ({children}: AuthProvideProps) => {
-  const [user, setUser] = useState<boolean | null>(null);
+  const [user, setUser] = useState<string | null>(null);
 
-  const login = () => setUser(true);
-  const logout = () => setUser(null);
+  const login = (params: {user: string}) => {
+    setUser(params.user);
+    localStorage.setItem('user', params.user);
+  }
+
+
+  const logout = () =>{
+    setUser(null);
+    localStorage.removeItem('user');
+  }
 
   return(
     <AuthContext.Provider value={{user, login, logout}}>

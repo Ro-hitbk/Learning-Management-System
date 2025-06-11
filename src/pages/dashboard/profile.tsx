@@ -2,16 +2,38 @@ import Layout  from "../../components/layout/layout";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
-import {Grid, Card, Avatar, TextField, CardContent, CardHeader, Button} from '@mui/material'
+import {Grid, Card, Avatar, TextField, CardContent, CardHeader, Button} from '@mui/material';
+import { useState } from "react";
+
+
+type Form = {
+  name: string;
+  username: string;
+  email: string;
+  oldpassword: string;
+  newpassword: string;
+  confirmpassword: string;
+};
 
 
 function Content(){
 
+  const[form, setForm] = useState<Form>({
+    name: '',
+    username: '',
+    email: '',
+    oldpassword: '',
+    newpassword: '',
+    confirmpassword: ''
+  });
+
 
   const fields = {'Name':'Rohit', 'Username':'hitro','Email':'rohit@gmail.com','Old Password': 'Old Password', 'New Password': 'New Password', 'Confirm Password': 'Confirm Password'}
 
-  const handleChange = () =>{
-    
+  const handleSubmit = () =>{
+    if(!(form.username.includes("@"))){
+
+    }
   }
 
   /*const fields = ['Name', 'Username', 'Email', 'Old Password', 'New Password', 'Confirm Password']*/

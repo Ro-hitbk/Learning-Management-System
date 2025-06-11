@@ -11,6 +11,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import Toolbar from '@mui/material/Toolbar';
 import { useNavigate } from 'react-router-dom';
 import PersonIcon from '@mui/icons-material/Person';
+import { Assessment } from '@mui/icons-material';
+import { useAuth } from '../../pages/auth/authcontext';
 
 const drawerWidth = 240;
 
@@ -27,6 +29,7 @@ export default function Sidebar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
+  const {user} = useAuth();
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -37,16 +40,31 @@ export default function Sidebar(props: Props) {
     setIsClosing(false);
   };
 
-  const handleDrawerToggle = () => {
+  /*const handleDrawerToggle = () => {
     if (!isClosing) {
       setMobileOpen(!mobileOpen);
     }
-  };
+  };*/
 
   const handleClick = (text: string) => {
     console.log(text)
     navigate("/dashboard/" + `${text}`)
 
+  }
+
+  const student = {Courses: 'courses', Assessment: 'assessment', BatchOverview: 'batch', ProgressTracker: 'progress'}
+
+  const teacher = {Batches: 'batches', Courses: 'courses', Assessment: 'assessment', Performance: 'performance'}
+
+
+  let mapp = null;
+  let base = ""
+  if(user === 'student@'){
+    mapp = student;
+    base = "student/"
+  }else{
+    base = "teacher/"
+    mapp = teacher;
   }
 
   const drawer = (
@@ -58,7 +76,7 @@ export default function Sidebar(props: Props) {
         ([text, routename]) => (
           <ListItem key={text} disablePadding sx={{ mb: 1 }}>
             <ListItemButton
-              onClick={() => handleClick(routename)}
+              onClick={() => handleClick(base + routename)}
               sx={{
                 borderRadius: 2,
                 px: 2,
@@ -83,6 +101,36 @@ export default function Sidebar(props: Props) {
       )}
     </List>
     <Divider />
+    <List sx={{ px: 1 }}>
+      {Object.entries(mapp).map(
+        ([text, routename]) => (
+          <ListItem key={text} disablePadding sx={{ mb: 1 }}>
+            <ListItemButton
+              onClick={() => handleClick(base + routename)}
+              sx={{
+                borderRadius: 2,
+                px: 2,
+                py: 1,
+                transition: 'background 0.3s, transform 0.2s',
+                '&:hover': {
+                  backgroundColor: '#e3f2fd',
+                  transform: 'translateX(4px)',
+                },
+              }}
+            >
+              <ListItemIcon sx={{ color: '#1976d2', minWidth: 40 }}>
+                {text === 'Profile' ? <PersonIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText
+                primary={text}
+                primaryTypographyProps={{ fontWeight: 500 }}
+              />
+            </ListItemButton>
+          </ListItem>
+        )
+      )}
+    </List>
+    <Divider/>
   </div>
 );
 

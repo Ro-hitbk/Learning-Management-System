@@ -1,5 +1,5 @@
 import {Box, Button, Card, TextField, Grid, Typography, InputAdornment, IconButton} from '@mui/material';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import loginimage from '../../assets/login.avif';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
 import { useNavigate } from "react-router-dom";
@@ -83,8 +83,19 @@ function Login(){
 
       e.preventDefault();
 
-      login();
-      navigate("/dashboard");
+      
+      /*useEffect(()=>{
+        localStorage.setItem('login', 'true');
+      },[])*/
+
+      login({user: form.username});
+
+      //console.log(localStorage.getItem('user'))
+      if(localStorage.getItem('user') === 'student@'){
+        navigate("/dashboard/student/courses");
+      }else{
+        navigate("/dashboard");
+      }
     }
   };
   

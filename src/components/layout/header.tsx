@@ -3,13 +3,17 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import { useAuth } from '../../pages/auth/authcontext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header(){
 
   const {logout} = useAuth();
 
+  const navigate = useNavigate();
+
   const handleClick = () => {
     logout();
+    //navigate("/");
   }
 
 
