@@ -1,6 +1,6 @@
-import { Box, Card, CardContent, CardHeader, CssBaseline, Divider, Grid, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, CardHeader, CssBaseline, Divider, Grid, Typography } from "@mui/material";
 import Layout from "../../components/layout/layout";
-
+import { useState } from "react";
 
 
 function Content(){
@@ -8,6 +8,16 @@ function Content(){
 
   const enmodules = [1,2,3,4,5,6,7,8,9,10,11,12]
 
+  const [index, setIndex] = useState(false)
+
+
+  const handleClickPending = () =>{
+    setIndex(false)
+  }
+
+  const handleClickUpcoming = () =>{
+    setIndex(true)
+  }
 
 
   return(
@@ -24,10 +34,11 @@ function Content(){
                     width: '100%',}}>
                     <CardHeader title={'Assessment'} />
                     <CardContent>
-                      <Typography variant="h6">Pending Assessments</Typography>
+                      <Button variant={!index? "contained": "outlined"} sx={{m:2}} onClick={handleClickPending}>Pending Assessments</Button>
+                      <Button variant={index? "contained": "outlined"} onClick={handleClickUpcoming}>Upcoming Assessments</Button>
                         <Grid container>
-                        {enmodules.map((index) => (
-                            <Grid size={{xs:12, sm:12, md:6}}>
+                        {!index && enmodules.map((index) => (
+                            <Grid size={{xs:12, sm:12, md:3}}>
                             <Box display='flex' flexDirection={'column'} gap={2} padding={2}>
                               <Card
                                 sx={{
@@ -56,12 +67,11 @@ function Content(){
                             </Grid>
                         ))}
                         <Grid size={{xs:12}}>
-                          <Divider sx={{ my: 4 }} />
-                          <Typography variant="h6">Upcoming Assessments</Typography>
+                          {/*<Divider sx={{ my: 4 }} />*/}
                         </Grid>
 
-                        {enmodules.map((index) => (
-                            <Grid size={{xs:12, sm:12, md:6}}>
+                        {index && enmodules.map((index) => (
+                            <Grid size={{xs:12, sm:12, md:3}}>
                             <Box display='flex' flexDirection={'column'} gap={2} padding={2}>
                               <Card
                                 sx={{

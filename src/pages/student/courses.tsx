@@ -25,9 +25,29 @@ function Content(){
                     <CardHeader title={'Courses'} />
                     <CardContent>
                       <Typography variant="h6">Enrolled Courses</Typography>
+                        <Box height={250} overflow="scroll"
+                         sx={{
+                          overflow: 'scroll',
+                          maxHeight: '300px',
+                          '&::-webkit-scrollbar': {
+                            width: '8px',
+                          },
+                          '&::-webkit-scrollbar-track': {
+                            //backgroundColor: '#f0f0f0',
+                            //borderRadius: '4px',
+                          },
+                          '&::-webkit-scrollbar-thumb': {
+                            backgroundColor: '#888',
+                            borderRadius: '4px',
+                          },
+                          '&::-webkit-scrollbar-thumb:hover': {
+                            backgroundColor: '#555',
+                          },
+                        }}
+                        >
                         <Grid container>
                         {enmodules.map((index) => (
-                            <Grid size={{xs:12, sm:12, md:6}}>
+                            <Grid size={{xs:12, sm:12, md:3}}>
                             <Box display='flex' flexDirection={'column'} gap={2} padding={2}>
                               <Card
                                 sx={{
@@ -55,11 +75,33 @@ function Content(){
                             </Box>
                             </Grid>
                         ))}
+                         </Grid>
+                        </Box>
                         <Grid size={{xs:12}}>
                           <Divider sx={{ my: 4 }} />
                           <Typography variant="h6">Available Courses</Typography>
                         </Grid>
-
+                        <Box height={300} overflow="scroll"
+                        sx={{
+                          overflow: 'scroll',
+                          maxHeight: '300px',
+                          '&::-webkit-scrollbar': {
+                            width: '8px',
+                          },
+                          '&::-webkit-scrollbar-track': {
+                            //backgroundColor: '#f0f0f0',
+                            //borderRadius: '4px',
+                          },
+                          '&::-webkit-scrollbar-thumb': {
+                            backgroundColor: '#888',
+                            borderRadius: '4px',
+                          },
+                          '&::-webkit-scrollbar-thumb:hover': {
+                            backgroundColor: '#555',
+                          },
+                        }}
+                        >
+                        <Grid container>
                         {enmodules.map((index) => (
                             <Grid size={{xs:12, sm:12, md:6}}>
                             <Box display='flex' flexDirection={'column'} gap={2} padding={2}>
@@ -90,6 +132,7 @@ function Content(){
                             </Grid>
                         ))}
                         </Grid>
+                        </Box>
                     </CardContent>
                   </Card>
               </Box>

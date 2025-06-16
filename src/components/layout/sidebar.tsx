@@ -13,6 +13,10 @@ import { useNavigate } from 'react-router-dom';
 import PersonIcon from '@mui/icons-material/Person';
 import { Assessment } from '@mui/icons-material';
 import { useAuth } from '../../pages/auth/authcontext';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import QuizIcon from '@mui/icons-material/Quiz';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import EqualizerIcon from '@mui/icons-material/Equalizer';
 
 const drawerWidth = 240;
 
@@ -52,7 +56,7 @@ export default function Sidebar(props: Props) {
 
   }
 
-  const student = {Courses: 'courses', Assessment: 'assessment', BatchOverview: 'batch', ProgressTracker: 'progress'}
+  const student = {Courses: {route:'courses', icon:<MenuBookIcon/>}, Assessment: {route:'assessment', icon:<QuizIcon/>}, BatchOverview: {route:'batch', icon:<PeopleAltIcon/>}, ProgressTracker: {route:'progress', icon:<EqualizerIcon/>}}
 
   const teacher = {Batches: 'batches', Courses: 'courses', Assessment: 'assessment', Performance: 'performance'}
 
@@ -103,10 +107,10 @@ export default function Sidebar(props: Props) {
     <Divider />
     <List sx={{ px: 1 }}>
       {Object.entries(mapp).map(
-        ([text, routename]) => (
-          <ListItem key={text} disablePadding sx={{ mb: 1 }}>
+        ([label, {route, icon}]) => (
+          <ListItem key={label} disablePadding sx={{ mb: 1 }}>
             <ListItemButton
-              onClick={() => handleClick(base + routename)}
+              onClick={() => handleClick(base + route)}
               sx={{
                 borderRadius: 2,
                 px: 2,
@@ -119,10 +123,10 @@ export default function Sidebar(props: Props) {
               }}
             >
               <ListItemIcon sx={{ color: '#1976d2', minWidth: 40 }}>
-                {text === 'Profile' ? <PersonIcon /> : <MailIcon />}
+                {icon}
               </ListItemIcon>
               <ListItemText
-                primary={text}
+                primary={route}
                 primaryTypographyProps={{ fontWeight: 500 }}
               />
             </ListItemButton>
